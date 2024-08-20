@@ -98,6 +98,12 @@ export default function ReservationScreen() {
               >
                 <Text style={[styles.choiceText, animal.dogFriendly === false && styles.selectedChoiceText]}>Non</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.choiceButton, animal.dogFriendly === 'unsure' && styles.selectedChoice]}
+                onPress={() => handleAnimalDetailChange(i, 'dogFriendly', 'unsure')}
+              >
+                <Text style={[styles.choiceText, animal.dogFriendly === 'unsure' && styles.selectedChoiceText]}>Pas sûr</Text>
+              </TouchableOpacity>
             </View>
 
             <Text style={styles.label}>Est-il sociable avec les chats ?</Text>
@@ -113,6 +119,12 @@ export default function ReservationScreen() {
                 onPress={() => handleAnimalDetailChange(i, 'catFriendly', false)}
               >
                 <Text style={[styles.choiceText, animal.catFriendly === false && styles.selectedChoiceText]}>Non</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.choiceButton, animal.catFriendly === 'unsure' && styles.selectedChoice]}
+                onPress={() => handleAnimalDetailChange(i, 'catFriendly', 'unsure')}
+              >
+                <Text style={[styles.choiceText, animal.catFriendly === 'unsure' && styles.selectedChoiceText]}>Pas sûr</Text>
               </TouchableOpacity>
             </View>
 
@@ -210,6 +222,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     color: '#4CAF50',  // Texte en vert clair
     textAlign: 'center',
+    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
   },
   scrollViewContent: {
     padding: 20,
@@ -218,6 +231,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     color: 'black',  // Texte en noir
+    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
   },
   input: {
     height: 40,
@@ -250,6 +264,7 @@ const styles = StyleSheet.create({
     color: 'white',  // Texte du bouton en blanc
     fontSize: 18,
     fontWeight: 'bold',
+    
   },
   choiceContainer: {
     flexDirection: 'row',
@@ -272,6 +287,7 @@ const styles = StyleSheet.create({
   choiceText: {
     color: '#4CAF50',
     fontSize: 16,
+    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
   },
   animalContainer: {
     marginBottom: 20,

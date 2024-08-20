@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Swiper from 'react-native-swiper';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -11,86 +12,83 @@ export default function HomeScreen() {
     require('../assets/chien6.jpg'),
   ];
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      handleNextImage();
-    }, 7000);
-
-    return () => {
-      clearInterval(intervalRef.current);
-    };
-  }, []);
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const handlePreviousImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.greeting}>Bonjour,</Text>
-      <Text style={styles.subGreeting}>Votre pet-sitter à Hoenheim</Text>
-      <View style={styles.imageContainer}>
-        <TouchableOpacity onPress={handlePreviousImage} style={styles.arrowButton}>
-          <View style={styles.arrowCircle}>
-            <Text style={styles.arrowText}>{"<"}</Text>
-          </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.greeting}>Bonjour,</Text>
+        <Text style={styles.subGreeting}>Votre pet-sitter à Hoenheim pour 30€/Jour</Text>
+        
+        {/* Image Swiper */}
+        <Swiper
+          style={styles.wrapper}
+          showsButtons={true}
+          buttonWrapperStyle={styles.buttonWrapper}
+          paginationStyle={styles.pagination}
+          activeDotColor='#4CAF50'
+          dotColor="#998FA2"
+          nextButton={
+            <View style={styles.nextButton}>
+              <Text style={styles.arrowText}>{">"}</Text>
+            </View>
+          }
+          prevButton={
+            <View style={styles.prevButton}>
+              <Text style={styles.arrowText}>{"<"}</Text>
+            </View>
+          }
+        >
+          {images.map((image, index) => (
+            <View style={styles.slide} key={index}>
+              <Image source={image} style={styles.image} />
+            </View>
+          ))}
+        </Swiper>
+
+        <View style={styles.reviewsSection}>
+          <Text style={styles.reviewsTitle}>Avis des clients</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.reviewsContainer}>
+            <View style={styles.reviewCard}>
+              <Image source={require('../assets/client2.jpg')} style={styles.reviewImage} />
+              <Text style={styles.reviewText}>"Excellent service ! Mon chien a adoré." - Sophie L.</Text>
+            </View>
+            <View style={styles.reviewCard}>
+              <Image source={require('../assets/client4.jpg')} style={styles.reviewImage} />
+              <Text style={styles.reviewText}>"Très professionnel et attentionné. Je recommande vivement." - Marc D.</Text>
+            </View>
+            <View style={styles.reviewCard}>
+              <Image source={require('../assets/client5.jpg')} style={styles.reviewImage} />
+              <Text style={styles.reviewText}>"Service impeccable, merci pour tout !" - Clara M.</Text>
+            </View>
+          </ScrollView>
+        </View>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('PhotoScreen')}
+          style={styles.submitButton}
+        >
+          <Text style={styles.submitButtonText}>Espaces photos</Text>
         </TouchableOpacity>
-        <Image source={images[currentImageIndex]} style={styles.image} />
-        <TouchableOpacity onPress={handleNextImage} style={styles.arrowButton}>
-          <View style={styles.arrowCircle}>
-            <Text style={styles.arrowText}>{">"}</Text>
-          </View>
+
+        <Text style={styles.readyText}>Alors êtes-vous prêt ?</Text>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Reservation')}
+          style={styles.submitButton}
+        >
+          <Text style={styles.submitButtonText}>Faire garder mon chien</Text>
         </TouchableOpacity>
       </View>
-      
-      <View style={styles.reviewsSection}>
-        <Text style={styles.reviewsTitle}>Avis des clients</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.reviewsContainer}>
-          <View style={styles.reviewCard}>
-            <Image source={require('../assets/client2.jpg')} style={styles.reviewImage} />
-            <Text style={styles.reviewText}>"Excellent service ! Mon chien a adoré." - Sophie L.</Text>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={require('../assets/client4.jpg')} style={styles.reviewImage} />
-            <Text style={styles.reviewText}>"Très professionnel et attentionné. Je recommande vivement." - Marc D.</Text>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={require('../assets/client5.jpg')} style={styles.reviewImage} />
-            <Text style={styles.reviewText}>"Service impeccable, merci pour tout !" - Clara M.</Text>
-          </View>
-        </ScrollView>
-      </View>
-
-      {/* Ajouter le bouton Espaces photos */}
-      <TouchableOpacity
-        onPress={() => navigation.navigate('PhotoScreen')} // Remplacez 'PhotoScreen' par le nom exact de votre screen
-        style={styles.submitButton}
-      >
-        <Text style={styles.submitButtonText}>Espaces photos</Text>
-      </TouchableOpacity>
-
-      {/* Ajouter le texte Alors êtes-vous prêt ? */}
-      <Text style={styles.readyText}>Alors êtes-vous prêt ?</Text>
-
-      {/* Ajouter le bouton Faire garder mon chien */}
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Reservation')}
-        style={styles.submitButton}
-      >
-        <Text style={styles.submitButtonText}>Faire garder mon chien</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
+const { width: w, height: h } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     padding: 20,
@@ -98,43 +96,64 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
     textAlign: 'left',
     marginBottom: 10,
   },
   subGreeting: {
     fontSize: 18,
+    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
     textAlign: 'left',
-    marginBottom: 20,
+    marginBottom: 10, // Ajout d'une petite marge pour respirer
   },
-  imageContainer: {
-    flexDirection: 'row',
+  wrapper: {
+    height: h * 0.55, // Ajustement pour que le Swiper prenne plus de place
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 20,
+    marginVertical: 0, // Retrait des marges verticales
   },
   image: {
-    width: '85%',
-    height: 300,
+    width: '100%',
+    height: '100%',
     resizeMode: 'cover',
     borderRadius: 15,
   },
-  arrowButton: {
-    width: '7%',
-    alignItems: 'center',
-    justifyContent: 'center',
+  buttonWrapper: {
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 10, // Positionnement ajusté pour coller aux flèches
+    left: 0,
+    right: 0, // S'assure que les flèches sont bien alignées
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10, // Réduction du padding
   },
-  arrowCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#4CAF50',
+  pagination: {
+    bottom: 15, // Positionnement ajusté de la pagination
+  },
+  nextButton: {
+    height: 50, // Taille réduite
+    borderRadius: 25, 
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 4,
+    width: 50, 
+    backgroundColor: '#4CAF50',
+  },
+  prevButton: {
+    height: 50, 
+    borderRadius: 25, 
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50, 
+    backgroundColor: '#4CAF50',
+    marginHorizontal: 10, 
   },
   arrowText: {
-    fontSize: 30,
+    fontSize: 20, 
     fontWeight: 'bold',
     color: 'white',
   },
@@ -143,9 +162,10 @@ const styles = StyleSheet.create({
   },
   reviewsTitle: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
     textAlign: 'center',
     marginBottom: 10,
+    marginTop: 20,
   },
   reviewsContainer: {
     flexDirection: 'row',
@@ -168,6 +188,7 @@ const styles = StyleSheet.create({
   },
   reviewText: {
     fontSize: 14,
+    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
     textAlign: 'center',
   },
   submitButton: {
@@ -183,14 +204,11 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
   },
   readyText: {
     fontSize: 18,
-    textAlign: 'center',
-  },
-  questionText: {
-    fontSize: 18,
+    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
     textAlign: 'center',
   },
 });
