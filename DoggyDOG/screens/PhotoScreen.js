@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 30,
     color: '#4CAF50',
-    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
+    fontFamily: 'Montserrat_700Bold',
   },
   container: {
     alignItems: 'center',

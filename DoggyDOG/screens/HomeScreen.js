@@ -102,24 +102,24 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 28,
-    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
+    fontFamily: 'Montserrat_700Bold',
     textAlign: 'left',
     marginBottom: 10,
   },
   subGreeting: {
     fontSize: 18,
-    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
+    fontFamily: 'Montserrat_400Regular',
     textAlign: 'left',
-    marginBottom: 20, // Ajout d'une petite marge pour respirer
+    marginBottom: 20,
   },
   wrapper: {
-    height: h * 0.55, // Ajustement pour que le Swiper prenne plus de place
+    height: h * 0.55,
   },
   slide: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 0, // Retrait des marges verticales
+    marginVertical: 0,
   },
   image: {
     width: '100%',
@@ -131,18 +131,18 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     flexDirection: "row",
     position: "absolute",
-    bottom: 10, // Positionnement ajusté pour coller aux flèches
+    bottom: 10,
     left: 0,
-    right: 0, // S'assure que les flèches sont bien alignées
+    right: 0,
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 10, // Réduction du padding
+    paddingHorizontal: 10,
   },
   pagination: {
-    bottom: 15, // Positionnement ajusté de la pagination
+    bottom: 15,
   },
   nextButton: {
-    height: 50, // Taille réduite
+    height: 50,
     borderRadius: 25, 
     alignItems: 'center',
     justifyContent: 'center',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   reviewsTitle: {
     fontSize: 22,
-    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
+    fontFamily: 'Montserrat_700Bold',
     textAlign: 'center',
     marginBottom: 10,
     marginTop: 20,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   reviewText: {
     fontSize: 14,
-    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
+    fontFamily: 'Montserrat_400Regular',
     textAlign: 'center',
   },
   submitButton: {
@@ -210,11 +210,11 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: 'white',
     fontSize: 18,
-    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
+    fontFamily: 'Montserrat_700Bold',
   },
   readyText: {
     fontSize: 18,
-    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
+    fontFamily: 'Montserrat_400Regular',
     textAlign: 'center',
   },
 });

@@ -214,15 +214,15 @@ export default function ReservationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',  // Fond blanc
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginVertical: 20,
-    color: '#4CAF50',  // Texte en vert clair
+    color: '#4CAF50',
     textAlign: 'center',
-    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
+    fontFamily: 'Montserrat_700Bold',
   },
   scrollViewContent: {
     padding: 20,
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     marginBottom: 10,
-    color: 'black',  // Texte en noir
-    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
+    color: 'black',
+    fontFamily: 'Montserrat_400Regular',
   },
   input: {
     height: 40,
@@ -254,14 +254,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   submitButton: {
-    backgroundColor: '#4CAF50',  // Bouton en vert clair
+    backgroundColor: '#4CAF50',
     paddingVertical: 10,
     borderRadius: 5,
     alignItems: 'center',
     marginTop: 20,
   },
   submitButtonText: {
-    color: 'white',  // Texte du bouton en blanc
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
     
@@ -282,12 +282,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#4CAF50',
   },
   selectedChoiceText: {
-    color: 'white',  // Texte sélectionné en blanc
+    color: 'white',
   },
   choiceText: {
     color: '#4CAF50',
     fontSize: 16,
-    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
+    fontFamily: 'Montserrat_400Regular',
   },
   animalContainer: {
     marginBottom: 20,
