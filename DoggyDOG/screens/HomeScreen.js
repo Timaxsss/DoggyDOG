@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
 
@@ -13,78 +13,85 @@ export default function HomeScreen() {
   ];
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-        <Text style={styles.greeting}>Bonjour,</Text>
-        <Text style={styles.subGreeting}>Votre pet-sitter à Hoenheim pour 30€/Jour</Text>
-        
-        {/* Image Swiper */}
-        <Swiper
-          style={styles.wrapper}
-          showsButtons={true}
-          buttonWrapperStyle={styles.buttonWrapper}
-          paginationStyle={styles.pagination}
-          activeDotColor='#4CAF50'
-          dotColor="#998FA2"
-          nextButton={
-            <View style={styles.nextButton}>
-              <Text style={styles.arrowText}>{">"}</Text>
-            </View>
-          }
-          prevButton={
-            <View style={styles.prevButton}>
-              <Text style={styles.arrowText}>{"<"}</Text>
-            </View>
-          }
-        >
-          {images.map((image, index) => (
-            <View style={styles.slide} key={index}>
-              <Image source={image} style={styles.image} />
-            </View>
-          ))}
-        </Swiper>
+    <ImageBackground source={require('../assets/background.jpg')} style={styles.backgroundImage}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          <Text style={styles.greeting}>Bonjour,</Text>
+          <Text style={styles.subGreeting}>Votre pet-sitter à Hoenheim pour 30€/Jour</Text>
+          
+          {/* Image Swiper */}
+          <Swiper
+            style={styles.wrapper}
+            showsButtons={true}
+            buttonWrapperStyle={styles.buttonWrapper}
+            paginationStyle={styles.pagination}
+            activeDotColor='#4CAF50'
+            dotColor="#998FA2"
+            nextButton={
+              <View style={styles.nextButton}>
+                <Text style={styles.arrowText}>{">"}</Text>
+              </View>
+            }
+            prevButton={
+              <View style={styles.prevButton}>
+                <Text style={styles.arrowText}>{"<"}</Text>
+              </View>
+            }
+          >
+            {images.map((image, index) => (
+              <View style={styles.slide} key={index}>
+                <Image source={image} style={styles.image} />
+              </View>
+            ))}
+          </Swiper>
 
-        <View style={styles.reviewsSection}>
-          <Text style={styles.reviewsTitle}>Avis des clients</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.reviewsContainer}>
-            <View style={styles.reviewCard}>
-              <Image source={require('../assets/client2.jpg')} style={styles.reviewImage} />
-              <Text style={styles.reviewText}>"Excellent service ! Mon chien a adoré." - Sophie L.</Text>
-            </View>
-            <View style={styles.reviewCard}>
-              <Image source={require('../assets/client4.jpg')} style={styles.reviewImage} />
-              <Text style={styles.reviewText}>"Très professionnel et attentionné. Je recommande vivement." - Marc D.</Text>
-            </View>
-            <View style={styles.reviewCard}>
-              <Image source={require('../assets/client5.jpg')} style={styles.reviewImage} />
-              <Text style={styles.reviewText}>"Service impeccable, merci pour tout !" - Clara M.</Text>
-            </View>
-          </ScrollView>
+          <View style={styles.reviewsSection}>
+            <Text style={styles.reviewsTitle}>Avis des clients</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.reviewsContainer}>
+              <View style={styles.reviewCard}>
+                <Image source={require('../assets/client2.jpg')} style={styles.reviewImage} />
+                <Text style={styles.reviewText}>"Excellent service ! Mon chien a adoré." - Sophie L.</Text>
+              </View>
+              <View style={styles.reviewCard}>
+                <Image source={require('../assets/client4.jpg')} style={styles.reviewImage} />
+                <Text style={styles.reviewText}>"Très professionnel et attentionné. Je recommande vivement." - Marc D.</Text>
+              </View>
+              <View style={styles.reviewCard}>
+                <Image source={require('../assets/client5.jpg')} style={styles.reviewImage} />
+                <Text style={styles.reviewText}>"Service impeccable, merci pour tout !" - Clara M.</Text>
+              </View>
+            </ScrollView>
+          </View>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('PhotoScreen')}
+            style={styles.submitButton}
+          >
+            <Text style={styles.submitButtonText}>Espaces photos</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.readyText}>Alors êtes-vous prêt ?</Text>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Reservation')}
+            style={styles.submitButton}
+          >
+            <Text style={styles.submitButtonText}>Faire garder mon chien</Text>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('PhotoScreen')}
-          style={styles.submitButton}
-        >
-          <Text style={styles.submitButtonText}>Espaces photos</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.readyText}>Alors êtes-vous prêt ?</Text>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Reservation')}
-          style={styles.submitButton}
-        >
-          <Text style={styles.submitButtonText}>Faire garder mon chien</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const { width: w, height: h } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
@@ -92,7 +99,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: 'white',
   },
   greeting: {
     fontSize: 28,
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
     textAlign: 'left',
-    marginBottom: 10, // Ajout d'une petite marge pour respirer
+    marginBottom: 20, // Ajout d'une petite marge pour respirer
   },
   wrapper: {
     height: h * 0.55, // Ajustement pour que le Swiper prenne plus de place
@@ -194,7 +200,7 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: '#4CAF50',
     paddingVertical: 10,
-    borderRadius: 5,
+    borderRadius: 35,
     alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,

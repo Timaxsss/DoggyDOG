@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
     color: '#4CAF50',
-    fontFamily: 'Montserrat_400Regular', // Utilisation de Montserrat Regular
+    fontFamily: 'Montserrat_700Bold', // Utilisation de Montserrat Bold
   },
   container: {
     alignItems: 'center',
